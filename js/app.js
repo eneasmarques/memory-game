@@ -9,6 +9,8 @@
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+const deck = document.querySelector('.deck');
+const cards = document.querySelectorAll('.card');
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -25,6 +27,24 @@ function shuffle(array) {
     return array;
 }
 
+deck.addEventListener('click', function (event) {					
+
+	//verifica se está clicando em uma carta
+	if (event.target.classList[0] !== 'card') return;	
+
+	//caso carta já virada não irá verificar novamente
+	if (event.target.classList.contains('match','open')) return;	
+
+	show(event);
+
+});	
+
+
+function show (event) {	
+
+	event.target.classList.add('open','show');	
+
+}
 
 /*
  * set up the event listener for a card. If a card is clicked:
