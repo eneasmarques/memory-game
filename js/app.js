@@ -23,13 +23,16 @@ function shuffle(array) {
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
+        temporaryValue = cards[currentIndex];
+        cards[currentIndex] = cards[randomIndex];
+        cards[randomIndex] = temporaryValue;
+        deck.appendChild(cards[randomIndex]);
     }
 
     return array;
 }
+
+shuffle(cards);
 
 deck.addEventListener('click', function (event) {
 
