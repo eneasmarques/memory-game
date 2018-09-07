@@ -55,6 +55,7 @@ deck.addEventListener('click', function (event) {
 	secondCard = event.target;
 	openedCard = false;
 
+	compare();
 });	
 
 
@@ -62,6 +63,29 @@ function show (event) {
 
 	event.target.classList.add('open','show');	
 
+}
+
+function compare () {	
+
+	setTimeout(() => {
+		
+		if (firstCard.firstElementChild.classList[1] === secondCard.firstElementChild.classList[1]) {
+			match();
+		}			
+
+	},800);
+
+}
+
+function match () {		
+		
+	firstCard.classList.remove('show');
+	secondCard.classList.remove('show');
+
+	firstCard.classList.add('match');
+	secondCard.classList.add('match');
+
+	blockedClick = false;
 }
 
 /*
