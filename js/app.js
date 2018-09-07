@@ -71,7 +71,9 @@ function compare () {
 		
 		if (firstCard.firstElementChild.classList[1] === secondCard.firstElementChild.classList[1]) {
 			match();
-		}			
+		} else {
+			close();
+		}
 
 	},800);
 
@@ -86,6 +88,15 @@ function match () {
 	secondCard.classList.add('match');
 
 	blockedClick = false;
+
+}
+
+function close () {
+
+	firstCard.classList.remove('open','show');
+	secondCard.classList.remove('open','show');
+	blockedClick = false;
+
 }
 
 /*
