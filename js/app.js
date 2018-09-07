@@ -12,6 +12,10 @@
 const deck = document.querySelector('.deck');
 const cards = document.querySelectorAll('.card');
 
+let firstCard, secondCard;
+let openedCard = false;
+let blockedClick = false;
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -27,15 +31,29 @@ function shuffle(array) {
     return array;
 }
 
-deck.addEventListener('click', function (event) {					
+deck.addEventListener('click', function (event) {	
 
 	//verifica se está clicando em uma carta
-	if (event.target.classList[0] !== 'card') return;	
+	if (event.target.classList[0] !== 'card') return;
+
+	//bloquear caso duas cartas viradas;
+	if (blockedClick) return;	
 
 	//caso carta já virada não irá verificar novamente
 	if (event.target.classList.contains('match','open')) return;	
 
 	show(event);
+
+	if (!openedCard) {
+		openedCard = true;
+		firstCard = event.target;
+
+		return;
+	}
+	
+	blockedClick = true;
+	secondCard = event.target;
+	openedCard = false;
 
 });	
 
