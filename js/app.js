@@ -93,8 +93,14 @@ function match () {
 
 function close () {
 
-	firstCard.classList.remove('open','show');
-	secondCard.classList.remove('open','show');
+	firstCard.classList.add('close');
+	secondCard.classList.add('close');
+
+	setTimeout(() => {
+		firstCard.classList.remove('show','open','close');
+		secondCard.classList.remove('show','open','close');
+	},600);
+
 	blockedClick = false;
 
 }
