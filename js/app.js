@@ -31,13 +31,16 @@ function shuffle(array) {
     return array;
 }
 
-deck.addEventListener('click', function (event) {	
+deck.addEventListener('click', function (event) {
+
+	//evita que seja selecionada a mesma carta duas vezes
+	if (firstCard === event.target) return;
+
+	//bloquear caso duas cartas viradas;
+	if (blockedClick) return;
 
 	//verifica se está clicando em uma carta
 	if (event.target.classList[0] !== 'card') return;
-
-	//bloquear caso duas cartas viradas;
-	if (blockedClick) return;	
 
 	//caso carta já virada não irá verificar novamente
 	if (event.target.classList.contains('match','open')) return;	
@@ -56,6 +59,7 @@ deck.addEventListener('click', function (event) {
 	openedCard = false;
 
 	compare();
+
 });	
 
 
@@ -65,45 +69,53 @@ function show (event) {
 
 }
 
-function compare () {	
+function compare () {
+
+	(firstCard.firstElementChild.classList[1]
+		=== secondCard.firstElementChild.classList[1]) ? match() : close();
+
+}
+
+function match () {
 
 	setTimeout(() => {
-		
-		if (firstCard.firstElementChild.classList[1] === secondCard.firstElementChild.classList[1]) {
-			match();
-		} else {
-			close();
-		}
+
+		firstCard.classList.remove('show');
+		secondCard.classList.remove('show');
+
+		firstCard.classList.add('match');
+		secondCard.classList.add('match');
+
+		blockedClick = false;
 
 	},800);
 
 }
 
-function match () {		
-		
-	firstCard.classList.remove('show');
-	secondCard.classList.remove('show');
+function close () {
 
-	firstCard.classList.add('match');
-	secondCard.classList.add('match');
-
-	blockedClick = false;
+	setTimeout(() => {
+		firstCard.classList.add('close');
+		secondCard.classList.add('close');
+		clear();
+	},600);
 
 }
 
-function close () {
-
-	firstCard.classList.add('close');
-	secondCard.classList.add('close');
+function clear () {
 
 	setTimeout(() => {
 		firstCard.classList.remove('show','open','close');
 		secondCard.classList.remove('show','open','close');
+
+		blockedClick = false;
+
+		firstCard = '';
+		secondCard = '';
 	},600);
 
-	blockedClick = false;
-
 }
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
