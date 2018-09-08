@@ -11,10 +11,13 @@
  */
 const deck = document.querySelector('.deck');
 const cards = document.querySelectorAll('.card');
+const moves = document.querySelector('.moves');
+
 
 let firstCard, secondCard;
 let openedCard = false;
 let blockedClick = false;
+let countMoves = 0;
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -69,6 +72,7 @@ deck.addEventListener('click', function (event) {
 function show (event) {	
 
 	event.target.classList.add('open','show');	
+	moves.textContent = ++countMoves;
 
 }
 
