@@ -14,11 +14,14 @@ const cards = document.querySelectorAll('.card');
 const moves = document.querySelector('.moves');
 const restart = document.querySelector('.restart');
 const stars = document.querySelectorAll('.stars > li');
+const timer = document.querySelector('.timer');
 
 let firstCard, secondCard;
 let openedCard = false;
 let blockedClick = false;
 let countMoves = 0;
+let time;
+let start = false;
 
 function incMoves () {
 		
@@ -46,11 +49,49 @@ function shuffle(array) {
 
 shuffle(cards);
 
+function startTime() {
+    let minutes = 0;
+    let seconds = 0;
+    time = setInterval(function () {
+        seconds = parseInt(seconds, 10) + 1;
+        minutes = parseInt(minutes, 10);
+
+        if (seconds >= 60) {
+            minutes += 1;
+            seconds = 0;
+        }
+
+        seconds = seconds < 10 ? '0' + seconds : seconds;
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+
+        timer.textContent = minutes + ':' + seconds;
+    }, 1000);
+}
+
+function stopTime() {
+    clearInterval(time);
+}
+
+function resetTime() {
+	seconds = '00';
+    minutes = '00';
+
+	timer.textContent = minutes + ':' + seconds;
+}
+
 restart.addEventListener('click', function(event) {
+	clearInterval(time);
+	resetTime();
 	close(true);
 });
 
 deck.addEventListener('click', function (event) {
+
+	//inicia contador
+	if (!start) {
+		startTime();
+		start = true;
+	};
 
 	//evita que seja selecionada a mesma carta duas vezes
 	if (firstCard === event.target) return;
