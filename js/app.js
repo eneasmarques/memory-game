@@ -12,6 +12,7 @@
 const deck = document.querySelector('.deck');
 const cards = document.querySelectorAll('.card');
 const moves = document.querySelector('.moves');
+const restart = document.querySelector('.restart');
 const stars = document.querySelectorAll('.stars > li');
 
 
@@ -45,6 +46,10 @@ function shuffle(array) {
 }
 
 shuffle(cards);
+
+restart.addEventListener('click', function(event) {
+	close(true);
+});
 
 deck.addEventListener('click', function (event) {
 
@@ -107,24 +112,46 @@ function match () {
 
 }
 
-function close () {
+function close (restart) {
 
 	setTimeout(() => {
 
-		firstCard.classList.add('close');
-		secondCard.classList.add('close');
-		clear();
+		if (restart) {
+			cards.forEach(card => {
+				if (card.classList.contains('open')) {
+					card.classList.add('close');					
+				}				
+			});
+		} else {
+			firstCard.classList.add('close');
+			secondCard.classList.add('close');
+		}
+		
+		clear(restart);
 
 	},600);
 
 }
 
-function clear () {
+function clear (restart) {
 
 	setTimeout(() => {
 
-		firstCard.classList.remove('show','open','close');
-		secondCard.classList.remove('show','open','close');
+		if (restart) {
+			cards.forEach(card => {				
+				card.classList.remove('show','open','close','match');		
+			});
+
+			stars.forEach(star => {
+				star.classList.remove('level');
+			});
+
+			moves.textContent = 0;	
+			openedCard = false;
+		} else {
+			firstCard.classList.remove('show','open','close');
+			secondCard.classList.remove('show','open','close');
+		}
 
 		blockedClick = false;
 
