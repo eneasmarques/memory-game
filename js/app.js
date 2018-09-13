@@ -143,7 +143,7 @@ function clear (restart) {
 			});
 
 			stars.forEach(star => {
-				star.classList.remove('level');
+				star.classList.add('level');
 			});
 
 			moves.textContent = 0;	
@@ -165,14 +165,14 @@ function clear (restart) {
 function level() {
 	
 	switch (countMoves) {
-		case 16:
-			stars[2].classList.add('level');
+		case 1:
+			stars[2].classList.remove('level');
 			break;
-		case 20:
-			stars[1].classList.add('level');
+		case 2:
+			stars[1].classList.remove('level');
 			break;
-		case 30:
-			stars[0].classList.add('level');
+		case 3:
+			stars[0].classList.remove('level');
 			break;
 	}
 

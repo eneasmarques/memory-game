@@ -165,11 +165,11 @@ h1 {
 .score-panel .stars li {
     list-style: none;
     display: inline-block;
-    color:  #ffca00fc;
+    color:  initial;    
 }
 
 .score-panel .stars .level {
-    color:  initial;
+    color:  #ffca00fc;
 }
 
 
