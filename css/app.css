@@ -17,8 +17,9 @@ body {
 }
 
 body {
-    background: linear-gradient(0deg,#CCFFFF,#FFCCCC,#CCFFFF);
+    background: linear-gradient(0deg,#b6e0e0,#fde6e6,#dfefdb);
     font-family: 'Coda', cursive;
+    color: #53156d;
 }
 
 .container {

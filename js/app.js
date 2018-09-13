@@ -229,3 +229,6 @@ function level() {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+ background: linear-gradient(0deg,#b6e0e0,#fde6e6,#dfefdb);
+ color: #53156d;
