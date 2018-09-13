@@ -12,12 +12,21 @@
 const deck = document.querySelector('.deck');
 const cards = document.querySelectorAll('.card');
 const moves = document.querySelector('.moves');
+const stars = document.querySelectorAll('.stars > li');
 
 
 let firstCard, secondCard;
 let openedCard = false;
 let blockedClick = false;
 let countMoves = 0;
+
+function incMoves () {
+		
+	countMoves = moves.textContent++;
+
+	level(countMoves);
+	
+};
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -71,9 +80,8 @@ deck.addEventListener('click', function (event) {
 
 function show (event) {	
 
-	event.target.classList.add('open','show');	
-	moves.textContent = ++countMoves;
-
+	event.target.classList.add('open','show');		
+	incMoves();
 }
 
 function compare () {
@@ -102,9 +110,11 @@ function match () {
 function close () {
 
 	setTimeout(() => {
+
 		firstCard.classList.add('close');
 		secondCard.classList.add('close');
 		clear();
+
 	},600);
 
 }
@@ -112,6 +122,7 @@ function close () {
 function clear () {
 
 	setTimeout(() => {
+
 		firstCard.classList.remove('show','open','close');
 		secondCard.classList.remove('show','open','close');
 
@@ -119,7 +130,24 @@ function clear () {
 
 		firstCard = '';
 		secondCard = '';
+
 	},600);
+
+}
+
+function level() {
+	
+	switch (countMoves) {
+		case 16:
+			stars[2].classList.add('level');
+			break;
+		case 20:
+			stars[1].classList.add('level');
+			break;
+		case 30:
+			stars[0].classList.add('level');
+			break;
+	}
 
 }
 
