@@ -15,7 +15,6 @@ const moves = document.querySelector('.moves');
 const restart = document.querySelector('.restart');
 const stars = document.querySelectorAll('.stars > li');
 
-
 let firstCard, secondCard;
 let openedCard = false;
 let blockedClick = false;
@@ -165,13 +164,13 @@ function clear (restart) {
 function level() {
 	
 	switch (countMoves) {
-		case 1:
+		case 16:
 			stars[2].classList.remove('level');
 			break;
-		case 2:
+		case 24:
 			stars[1].classList.remove('level');
 			break;
-		case 3:
+		case 32:
 			stars[0].classList.remove('level');
 			break;
 	}

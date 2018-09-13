@@ -17,7 +17,7 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    background: linear-gradient(0deg,#CCFFFF,#FFCCCC,#CCFFFF);
     font-family: 'Coda', cursive;
 }
 
@@ -40,10 +40,8 @@ h1 {
 .deck {
     width: 660px;
     min-height: 680px;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     padding: 32px;
     border-radius: 10px;
-    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -171,7 +169,6 @@ h1 {
 .score-panel .stars .level {
     color:  #ffca00fc;
 }
-
 
 .score-panel .restart {
     float: right;
