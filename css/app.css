@@ -17,7 +17,6 @@ body {
 }
 
 body {
-    background: linear-gradient(0deg,#b6e0e0,#fde6e6,#dfefdb);
     font-family: 'Coda', cursive;
     color: #53156d;
 }
@@ -38,6 +37,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background: linear-gradient(0deg,#b6e0e0,#fde6e6,#dfefdb);
 }
 
 h1 {
