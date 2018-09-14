@@ -210,8 +210,8 @@ h1 {
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 2;
-    background: #ffffff40;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.25);
     -webkit-transition: all 0.5s 0.5s ease-in-out;
     transition: all 0.5s 0.5s ease-in-out;
 }
@@ -225,7 +225,7 @@ h1 {
     max-height: 100%;
     overflow: auto;
     margin: auto;
-    z-index: 3;
+    z-index: 2;
     opacity: 1;
     border-radius: 3px;
     background: #fff;
@@ -235,7 +235,7 @@ h1 {
 
 .modal .close-button {
     position: relative;
-    z-index: 3;
+    z-index: 2;
     border: 0;
     background: green;
     color: white;
