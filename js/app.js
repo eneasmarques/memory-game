@@ -15,6 +15,23 @@ const moves = document.querySelector('.moves');
 const restart = document.querySelector('.restart');
 const stars = document.querySelectorAll('.stars > li');
 const timer = document.querySelector('.timer');
+const countStar = 3;
+
+var modal = document.querySelector("#modal");
+var modalContent = document.querySelector(".modal-content");
+var closeButton = document.querySelector("#close-button");
+var textCongratulation = document.querySelector("#text-congratulation");
+
+closeButton.addEventListener("click", function() {
+	showCongratulation();
+	restartGame();
+});
+
+function showCongratulation() {
+	textCongratulation.textContent = `With ${countMoves} moves and ${countStar} star in ${timer.textContent}.`;
+	modal.classList.toggle('modal-show');
+	modalContent.classList.toggle('modal-show');
+}
 
 let firstCard, secondCard;
 let openedCard = false;
@@ -82,10 +99,20 @@ function resetTime() {
 }
 
 restart.addEventListener('click', function(event) {
+	restartGame();
+});
+
+function restartGame() {
 	clearInterval(time);
 	resetTime();
-	close(true);	
-});
+	close(true);
+	countStar = 3;
+}
+
+function endGame() {
+	clearInterval(time);
+	showCongratulation();
+}
 
 deck.addEventListener('click', function (event) {
 
@@ -150,8 +177,16 @@ function match () {
 
 		blockedClick = false;
 
+		progress();
+
 	},800);
 
+}
+
+function progress() {
+	const matchCards = document.querySelectorAll('.match');
+
+	if (matchCards.length === cards.length) endGame();
 }
 
 function close (restart) {
@@ -211,12 +246,15 @@ function level() {
 	switch (countMoves) {
 		case 16:
 			stars[2].classList.remove('level');
+			countStar = 2;
 			break;
 		case 24:
 			stars[1].classList.remove('level');
+			countStar = 1;
 			break;
 		case 32:
 			stars[0].classList.remove('level');
+			countStar = 0;
 			break;
 	}
 
