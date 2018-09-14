@@ -254,12 +254,23 @@ h1 {
  */
 
 .score-panel {
+    flex-wrap: wrap;
     text-align: left;
     width: 345px;
-    margin-bottom: 10px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+}
+
+.score-panel .score-title {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+}
+
+.score-panel .score-values {
+    display: flex;
+    width: 100%;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
