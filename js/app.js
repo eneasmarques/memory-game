@@ -149,7 +149,7 @@ function showCongratulation() {
 }
 
 function incMoves () {
-	countMoves = moves.textContent++;
+	countMoves = ++moves.textContent;
 	level(countMoves);
 };
 
@@ -231,15 +231,15 @@ function clear (restart) {
 
 function level() {
 	switch (countMoves) {
-		case 16:
+		case 20:
 			stars[2].classList.remove('level');
 			countStar = 2;
 			break;
-		case 24:
+		case 31:
 			stars[1].classList.remove('level');
 			countStar = 1;
 			break;
-		case 32:
+		case 36:
 			stars[0].classList.remove('level');
 			countStar = 0;
 			break;
