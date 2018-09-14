@@ -15,7 +15,7 @@ const moves = document.querySelector('.moves');
 const restart = document.querySelector('.restart');
 const stars = document.querySelectorAll('.stars > li');
 const timer = document.querySelector('.timer');
-const countStar = 3;
+let countStar = 3;
 
 var modal = document.querySelector("#modal");
 var modalContent = document.querySelector(".modal-content");
@@ -186,7 +186,8 @@ function match () {
 function progress() {
 	const matchCards = document.querySelectorAll('.match');
 
-	if (matchCards.length === cards.length) endGame();
+	if (matchCards.length === cards.length) 
+		endGame();
 }
 
 function close (restart) {
