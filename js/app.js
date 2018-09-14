@@ -82,7 +82,7 @@ function resetTime() {
 restart.addEventListener('click', function(event) {
 	clearInterval(time);
 	resetTime();
-	close(true);
+	close(true);	
 });
 
 deck.addEventListener('click', function (event) {
@@ -188,6 +188,8 @@ function clear (restart) {
 
 			moves.textContent = 0;	
 			openedCard = false;
+
+			shuffle(cards);
 		} else {
 			firstCard.classList.remove('show','open','close');
 			secondCard.classList.remove('show','open','close');
