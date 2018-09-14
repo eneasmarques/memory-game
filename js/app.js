@@ -77,6 +77,8 @@ function resetTime() {
     minutes = '00';
 
 	timer.textContent = minutes + ':' + seconds;
+
+	start = false;
 }
 
 restart.addEventListener('click', function(event) {
