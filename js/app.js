@@ -22,49 +22,12 @@ var modalContent = document.querySelector(".modal-content");
 var closeButton = document.querySelector("#close-button");
 var textCongratulation = document.querySelector("#text-congratulation");
 
-closeButton.addEventListener("click", function() {
-	showCongratulation();
-	restartGame();
-});
-
-function showCongratulation() {
-	textCongratulation.textContent = `With ${countMoves} moves and ${countStar} star in ${timer.textContent}.`;
-	modal.classList.toggle('modal-show');
-	modalContent.classList.toggle('modal-show');
-}
-
 let firstCard, secondCard;
 let openedCard = false;
 let blockedClick = false;
 let countMoves = 0;
 let time;
 let start = false;
-
-function incMoves () {
-		
-	countMoves = moves.textContent++;
-
-	level(countMoves);
-	
-};
-
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = cards[currentIndex];
-        cards[currentIndex] = cards[randomIndex];
-        cards[randomIndex] = temporaryValue;
-        deck.appendChild(cards[randomIndex]);
-    }
-
-    return array;
-}
-
-shuffle(cards);
 
 function startTime() {
     let minutes = 0;
@@ -98,21 +61,23 @@ function resetTime() {
 	start = false;
 }
 
-restart.addEventListener('click', function(event) {
-	restartGame();
-});
+// Shuffle function from http://stackoverflow.com/a/2450976
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
 
-function restartGame() {
-	clearInterval(time);
-	resetTime();
-	close(true);
-	countStar = 3;
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = cards[currentIndex];
+        cards[currentIndex] = cards[randomIndex];
+        cards[randomIndex] = temporaryValue;
+        deck.appendChild(cards[randomIndex]);
+    }
+
+    return array;
 }
 
-function endGame() {
-	clearInterval(time);
-	showCongratulation();
-}
+shuffle(cards);
 
 deck.addEventListener('click', function (event) {
 
@@ -132,7 +97,7 @@ deck.addEventListener('click', function (event) {
 	if (event.target.classList[0] !== 'card') return;
 
 	//caso carta já virada não irá verificar novamente
-	if (event.target.classList.contains('match','open')) return;	
+	if (event.target.classList.contains('match','open')) return;
 
 	show(event);
 
@@ -151,22 +116,49 @@ deck.addEventListener('click', function (event) {
 
 });	
 
+restart.addEventListener('click', function(event) {
+	restartGame();
+});
 
-function show (event) {	
+closeButton.addEventListener("click", function() {
+	showCongratulation();
+	restartGame();
+});
 
-	event.target.classList.add('open','show');		
+function show (event) {
+	event.target.classList.add('open','show');
 	incMoves();
 }
 
-function compare () {
+function restartGame() {
+	clearInterval(time);
+	resetTime();
+	close(true);
+	countStar = 3;
+}
 
+function endGame() {
+	clearInterval(time);
+	showCongratulation();
+}
+
+function showCongratulation() {
+	textCongratulation.textContent = `With ${countMoves} moves and ${countStar} star in ${timer.textContent}.`;
+	modal.classList.toggle('modal-show');
+	modalContent.classList.toggle('modal-show');
+}
+
+function incMoves () {
+	countMoves = moves.textContent++;
+	level(countMoves);
+};
+
+function compare () {
 	(firstCard.firstElementChild.classList[1]
 		=== secondCard.firstElementChild.classList[1]) ? match() : close();
-
 }
 
 function match () {
-
 	setTimeout(() => {
 
 		firstCard.classList.remove('show');
@@ -180,25 +172,23 @@ function match () {
 		progress();
 
 	},800);
-
 }
 
 function progress() {
 	const matchCards = document.querySelectorAll('.match');
 
-	if (matchCards.length === cards.length) 
+	if (matchCards.length === cards.length)
 		endGame();
 }
 
 function close (restart) {
-
 	setTimeout(() => {
 
 		if (restart) {
 			cards.forEach(card => {
 				if (card.classList.contains('open')) {
-					card.classList.add('close');					
-				}				
+					card.classList.add('close');
+				}
 			});
 		} else {
 			firstCard.classList.add('close');
@@ -208,23 +198,21 @@ function close (restart) {
 		clear(restart);
 
 	},600);
-
 }
 
 function clear (restart) {
-
 	setTimeout(() => {
 
 		if (restart) {
-			cards.forEach(card => {				
-				card.classList.remove('show','open','close','match');		
+			cards.forEach(card => {
+				card.classList.remove('show','open','close','match');
 			});
 
 			stars.forEach(star => {
 				star.classList.add('level');
 			});
 
-			moves.textContent = 0;	
+			moves.textContent = 0;
 			openedCard = false;
 
 			shuffle(cards);
@@ -239,11 +227,9 @@ function clear (restart) {
 		secondCard = '';
 
 	},600);
-
 }
 
 function level() {
-	
 	switch (countMoves) {
 		case 16:
 			stars[2].classList.remove('level');
@@ -258,9 +244,7 @@ function level() {
 			countStar = 0;
 			break;
 	}
-
 }
-
 
 /*
  * set up the event listener for a card. If a card is clicked:
