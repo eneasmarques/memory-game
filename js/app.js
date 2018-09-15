@@ -1,14 +1,3 @@
-/*
- * Create a list that holds all of your cards
- */
-
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
 const deck = document.querySelector('.deck');
 const cards = document.querySelectorAll('.card');
 const moves = document.querySelector('.moves');
@@ -17,10 +6,10 @@ const stars = document.querySelectorAll('.stars > li');
 const timer = document.querySelector('.timer');
 let countStar = 3;
 
-var modal = document.querySelector("#modal");
-var modalContent = document.querySelector(".modal-content");
-var closeButton = document.querySelector("#close-button");
-var textCongratulation = document.querySelector("#text-congratulation");
+var modal = document.querySelector('#modal');
+var modalContent = document.querySelector('.modal-content');
+var closeButton = document.querySelector('#close-button');
+var textCongratulation = document.querySelector('#text-congratulation');
 
 let firstCard, secondCard;
 let openedCard = false;
@@ -29,6 +18,7 @@ let countMoves = 0;
 let time;
 let start = false;
 
+// Inicia a contagem do tempo
 function startTime() {
     let minutes = 0;
     let seconds = 0;
@@ -48,10 +38,15 @@ function startTime() {
     }, 1000);
 }
 
+//Para a contagem de tempo
 function stopTime() {
     clearInterval(time);
 }
 
+/*
+*Zera o tempo e altera o valor de start
+*para que possa ser iniciada uma nova contagem
+*/
 function resetTime() {
 	seconds = '00';
     minutes = '00';
@@ -81,13 +76,13 @@ shuffle(cards);
 
 deck.addEventListener('click', function (event) {
 
-	//inicia contador
+	//inicia contador caso não esteja em funcionamento
 	if (!start) {
 		startTime();
 		start = true;
 	};
 
-	//evita que seja selecionada a mesma carta duas vezes
+	//evita que a primeira carta seja selecionada duas vezes
 	if (firstCard === event.target) return;
 
 	//bloquear caso duas cartas viradas;
@@ -101,35 +96,40 @@ deck.addEventListener('click', function (event) {
 
 	show(event);
 
+	//verifica se existe uma carta já virada
 	if (!openedCard) {
 		openedCard = true;
 		firstCard = event.target;
 
 		return;
 	}
-	
+
 	blockedClick = true;
 	secondCard = event.target;
 	openedCard = false;
 
 	compare();
 
-});	
+});
 
+//reinicia o jogo
 restart.addEventListener('click', function(event) {
 	restartGame();
 });
 
-closeButton.addEventListener("click", function() {
+//fecha o modal e inicia um novo jogo
+closeButton.addEventListener('click', function() {
 	showCongratulation();
 	restartGame();
 });
 
+//vira a carta selecionada
 function show (event) {
 	event.target.classList.add('open','show');
 	incMoves();
 }
 
+//zera as informações do painel de pontos e desvira todas as cartas
 function restartGame() {
 	clearInterval(time);
 	resetTime();
@@ -137,27 +137,32 @@ function restartGame() {
 	countStar = 3;
 }
 
+//para o tempo do jogo
 function endGame() {
 	clearInterval(time);
 	showCongratulation();
 }
 
+//abre o modal para mostrar o resultado do jogo
 function showCongratulation() {
 	textCongratulation.textContent = `With ${countMoves} moves and ${countStar} star in ${timer.textContent}.`;
 	modal.classList.toggle('modal-show');
 	modalContent.classList.toggle('modal-show');
 }
 
+//incrementa os movimentos
 function incMoves () {
 	countMoves = ++moves.textContent;
 	level(countMoves);
 };
 
+//verifica se as cartas são iguais
 function compare () {
 	(firstCard.firstElementChild.classList[1]
 		=== secondCard.firstElementChild.classList[1]) ? match() : close();
 }
 
+//atribui a classe match as cartas caso iguais
 function match () {
 	setTimeout(() => {
 
@@ -174,6 +179,7 @@ function match () {
 	},800);
 }
 
+//verifica se o jogo acabou
 function progress() {
 	const matchCards = document.querySelectorAll('.match');
 
@@ -181,6 +187,8 @@ function progress() {
 		endGame();
 }
 
+//desvira as cartas
+//caso restart = true será desviradas todas as cartas
 function close (restart) {
 	setTimeout(() => {
 
@@ -194,12 +202,13 @@ function close (restart) {
 			firstCard.classList.add('close');
 			secondCard.classList.add('close');
 		}
-		
+
 		clear(restart);
 
 	},600);
 }
 
+//retira todas as classes das cartas com exceção da.card
 function clear (restart) {
 	setTimeout(() => {
 
@@ -229,6 +238,7 @@ function clear (restart) {
 	},600);
 }
 
+//remove estrelas baseado na quantidade de movimentos
 function level() {
 	switch (countMoves) {
 		case 20:
@@ -245,14 +255,3 @@ function level() {
 			break;
 	}
 }
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
