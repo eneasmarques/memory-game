@@ -286,6 +286,33 @@ h1 {
     padding: 0;
     display: block;
     margin: 0 5px 0 0;
+    max-whidth: 100%;
+}
+
+.score-panel .score-stars {
+    width: 100px;
+    text-align: center;
+    justify-content: space-between;
+    display: table-cell;
+}
+
+.score-panel .score-timer {
+    width: 60px;
+    justify-content: center;
+    text-align: center;
+    display: block;
+}
+
+.score-panel .time {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    max-whidth: 33%;
+    float: left;
+}
+
+.score-panel .timer {
+    display: block;
 }
 
 .score-panel .score-stars {
@@ -317,6 +344,7 @@ h1 {
     list-style: none;
     display: inline-block;
     color: initial;
+    whidth: 33%;
 }
 
 .score-panel .stars .level {
