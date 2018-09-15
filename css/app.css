@@ -261,7 +261,7 @@ h1 {
     width: 345px;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
+    display: block;
 }
 
 .score-panel .score-title {
