@@ -1,5 +1,5 @@
 const deck = document.querySelector('.deck');
-const cards = document.querySelectorAll('.card');
+let cards = document.querySelectorAll('.card');
 const moves = document.querySelector('.moves');
 const restart = document.querySelector('.restart');
 const stars = document.querySelectorAll('.stars > li');
@@ -17,6 +17,11 @@ let blockedClick = false;
 let countMoves = 0;
 let time;
 let start = false;
+
+//variáveis para uso do teclado
+let numKey, alphaKey, alphanumKey;
+let arrayAlpha = [];
+let arrayNum = [];
 
 // Inicia a contagem do tempo
 function startTime() {
@@ -69,13 +74,14 @@ function shuffle(array) {
         deck.appendChild(cards[randomIndex]);
     }
 
-    return array;
+    //atualiza cards
+    cards = document.querySelectorAll('.card');
 }
 
+//embaralha cartas e atriui novo valor a variável
 shuffle(cards);
 
-deck.addEventListener('click', function (event) {
-
+function main(card) {
 	//inicia contador caso não esteja em funcionamento
 	if (!start) {
 		startTime();
@@ -83,34 +89,121 @@ deck.addEventListener('click', function (event) {
 	};
 
 	//evita que a primeira carta seja selecionada duas vezes
-	if (firstCard === event.target) return;
+	if (firstCard === card) return;
+	console.log(`aqui ${firstCard} ${card}` );
 
 	//bloquear caso duas cartas viradas;
 	if (blockedClick) return;
 
 	//verifica se está clicando em uma carta
-	if (event.target.classList[0] !== 'card') return;
+	if (card.classList[0] !== 'card') return;
 
 	//caso carta já virada não irá verificar novamente
-	if (event.target.classList.contains('match','open')) return;
+	if (card.classList.contains('match','open')) return;
 
-	show(event);
+	show(card);
 
 	//verifica se existe uma carta já virada
 	if (!openedCard) {
 		openedCard = true;
-		firstCard = event.target;
+		firstCard = card;
 
 		return;
 	}
 
 	blockedClick = true;
-	secondCard = event.target;
+	secondCard = card;
 	openedCard = false;
 
 	compare();
+}
+
+deck.addEventListener('click', function (event) {
+	main(event.target);
+});
+
+//verifica se é uma tecla válida
+document.addEventListener('keyup', function (event) {
+
+	numKey = '';
+	alphaKey = '';
+
+	switch (event.key.toUpperCase()) {
+		case 'A':
+			alphaKey = parseInt(1, 10);
+			break;
+		case 'S':
+			alphaKey = parseInt(2, 10);
+			break;
+		case 'D':
+			alphaKey = parseInt(3, 10);
+			break;
+		case 'F':
+			alphaKey = parseInt(4, 10);
+			break;
+		case 'R':
+			restartGame();
+	}
+
+	if (parseInt(event.key, 10) >= 0 && parseInt(event.key, 10) <=4) {
+		numKey = parseInt(event.key, 10);
+	}
+
+	if (alphaKey !== '' || numKey !== '') selectCard();
 
 });
+
+/*
+*analisa se uma carta foi selecionada
+*envia a carta para main()
+*/
+function selectCard () {
+	let index;
+
+	if (alphaKey !== '') {
+		highLighCards(arrayAlpha);
+		arrayAlpha = [];
+		for (i = 0; i < 4; i++) {
+			index = (4 * (i)) + alphaKey - 1;
+			arrayAlpha.push(index);
+			cards[index].classList.add('select');
+		}
+	} else if (numKey !== '') {
+		highLighCards(arrayNum);
+		arrayNum = [];
+		for (i = 0; i < 4; i++) {
+			index = (4 * (numKey - 1)) + i;
+			arrayNum.push(index);
+			cards[index].classList.add('select');
+		}
+	}
+
+	if (arrayAlpha.length > 0 && arrayNum.length > 0) {
+
+		index = arrayAlpha.filter(x => arrayNum.includes(x));
+
+		cards[index].classList.remove('select');
+
+		main(cards[index]);
+
+		setTimeout(() => {
+
+			highLighCards(arrayAlpha);
+			highLighCards(arrayNum);
+
+			arrayNum = [];
+			arrayAlpha = [];
+
+		},500);
+	}
+}
+
+//altera a cor das cartas da coluna ou linha informada pelo teclado
+function highLighCards (arrayCards) {
+	arrayCards.forEach(index => {
+		cards[index].classList.toggle('select');
+	});
+}
 
 //reinicia o jogo
 restart.addEventListener('click', function(event) {
@@ -124,8 +217,8 @@ closeButton.addEventListener('click', function() {
 });
 
 //vira a carta selecionada
-function show (event) {
-	event.target.classList.add('open','show');
+function show (card) {
+	card.classList.add('open','show');
 	incMoves();
 }
 
@@ -214,7 +307,7 @@ function clear (restart) {
 
 		if (restart) {
 			cards.forEach(card => {
-				card.classList.remove('show','open','close','match');
+				card.classList.remove('show','open','close','match','select');
 			});
 
 			stars.forEach(star => {
