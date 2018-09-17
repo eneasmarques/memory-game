@@ -1,7 +1,7 @@
 # Jogo da Memória
 
 ## Índice
-* [Instalar](#instalação)
+* [Instalar](#instalar)
 * [Instruções](#instruções)
 * [Regras](#regras)
 * [Contribuindo](#contribuindo)
@@ -47,10 +47,10 @@ Ao clicar em reset será chamada a função `resetGame()` que irá redefinir o s
 
   A quantidade de movimentos definirá o seu desempenho.
 
-- :star: :star: :star: - muito boa - até 20 Movimentos
-- :star: :star: - bom - até 30 Movimentos
-- :star: - mal - Até de 35 movimentos
-- Sem estrelas - muito ruim - Acima de 35 movimentos
+- :star: :star: :star: - EXCELENTE - até 20 Movimentos
+- :star: :star: -  BEM - até 30 Movimentos
+- :star: - MAL - Até de 35 movimentos
+- Sem estrelas - MUITO MAL - Acima de 35 movimentos
 
 Para reiniciar o jogo, clique no botão reiniciar :repeat:.
 
