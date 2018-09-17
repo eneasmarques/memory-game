@@ -1,20 +1,62 @@
-# Memory Game Project
+# Jogo da Memória
 
-## Table of Contents
+## Índice
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+* [Instalar] (# instalação)
+* [Instruções] (# instruções)
+* [Regras] (regras #)
+* [Contribuindo] (# contribuindo)
 
-## Instructions
+## Instalar
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+[GitHub.com] - (master) (https://github.com/kubr2017/memory-game)
 
-To get started, open `js/app.js` and start building out the app's functionality
+[GitHub.io]  - (https://eneasmarques.github.io/memorygame/)
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+## Instruções
 
-## Contributing
+### Arquivos e pastas
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+O código consiste em 2 pastas:
+  * ** css ** - para o arquivo `app.css`.
+  * ** js ** - para o arquivo `app.js`.
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+  ### Código de trabalho
+
+  Ao carregar o html a função ` shuffle() ` (embaralhar as cartas) é inicada. Quando o jogador clica sobre alguma carta utiliza uma tecla válida (ASDF - 1234) o jogo é iniciado.
+
+  A função`shuffle(array)` recebe um array com as cartas e os dispõe em um nova ordem.
+
+  Ao clicar em uma carta ou ao teclar A, S, D, F, 1, 2 ou 3 é chamada a função ` main() ` que inicia chama a função ` startTime() ` e faz a verificação das cartas por meio da função ` compare() `;
+
+  Para virar as cartas selecionadas são utilizadas as classes ** css ** `" show "` e `" open "`.
+
+  Quando utilizado o teclado a ** linha ** ou ** coluna ** selecionada ficará em destaque devido a classe `" select "`.
+
+  Selecionando uma ** coluna ** e uma ** linha ** a carta será virada assim como ao clicar;
+
+  Quando duas cartas são selecionadas é chamado a função ` compare() ` que verificará se as cartas são iguais;
+
+  Cartas iguais recebem a classe ** css ** `" match "`.
+
+  Cartas diferentes recebem a classe ** css ** `" close "`.
+
+  Ao clicar em reset será chamada a função ` resetGame() ` que irá redefinir o status do jogo.
+
+## Regras
+
+  Apenas duas cartas podem ser viradas por vez.
+
+  A quantidade de movimentos definirá o seu desempenho.
+
+-: estrela :: estrela :: estrela: - muito boa - até 20 Movimentos
+-: estrela :: estrela: - bom - até 30 Movimentos
+-: estrela: - mal - Até de 35 movimentos
+- Sem estrelas - muito ruim - Acima de 35 movimentos
+
+Para reiniciar o jogo, clique no botão reiniciar: repeat :.
+
+
+## Contribuindo
+
+Depois de aprovado pela ** Udacity ** qualquer contribuiçaõ será bem vinda.
