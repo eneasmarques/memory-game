@@ -8,8 +8,8 @@
 
 ## Instalar
 
-[GitHub.com](https://github.com/kubr2017/memory-game) - (branch master)
-[GitHub.io](https://eneasmarques.github.io/memorygame/)
+[GitHub.com](https://github.com/eneasmarques/memorygame) - (branch master)
+[GitHub.io](https://eneasmarques.github.io/memorygame)
 
 ## Instruções
 
